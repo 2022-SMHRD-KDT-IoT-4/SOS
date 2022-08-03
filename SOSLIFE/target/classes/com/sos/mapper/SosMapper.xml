@@ -2,5 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sos.mapper.SosMapper">
     
-    
+    <select id="UserLogin" parameterType="com.sos.domain.tbl_user" resultType="com.sos.domain.tbl_user">
+		select * from tbl_user where user_id = #{user_id} and user_pw = #{user_pw}
+    </select>
+    <insert id="UserJoin" parameterType="com.sos.domain.tbl_user">
+		insert into tbl_user values(#{user_id}, #{user_pw}, #{user_nick}, #{user_type}, sysdate)        
+    </insert>
+    <insert id="gpstest" parameterType="com.sos.domain.tbl_location">
+        insert into tbl_location values(tbl_location_SEQ.nextval, 4, #{latitude}, #{longitude})
+    </insert>
+    <insert id="watertest" parameterType="com.sos.domain.tbl_water">
+         insert into tbl_water(jacket_seq, water_pressure, water_date, water_temperature, water_detect) values(4, #{water_pressure}, sysdate, #{water_temperature}, #{water_detect})
+    </insert>
+    <insert id="registjacket" parameterType="com.sos.domain.tbl_jacket">
+		insert into tbl_jacket(user_id, ship_seq, jacket_date, product_id) values(#{user_id}, 4, sysdate, #{product_id})        
+    </insert>
+    <select id="getdate" resultType="com.sos.domain.tbl_water">
+        select * from tbl_water
+    </select>
 </mapper>

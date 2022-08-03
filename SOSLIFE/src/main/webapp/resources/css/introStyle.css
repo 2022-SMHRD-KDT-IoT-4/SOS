@@ -1,0 +1,662 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500&family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700@display=swap');
+
+*
+{ 
+  font-family: 'Metrophobic', sans-serif;
+}
+body {
+  margin: 0;
+}
+
+.header {
+  padding-top: 110px;
+  background-color: #000;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-image: url("./imgList/mainImg/sea.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/*------메뉴네비게이션시작*/
+/*움직이는메뉴버튼*/
+input[id="menuicon"] {
+  display: none;
+}
+
+input[id="menuicon"]+label {
+  display: block;
+  width: 60px;
+  width: 60px;
+  height: 40px;
+  position: fixed;
+  right: 2%;
+  top: 25%;
+  transition: all .35s;
+  z-index: 55;
+  cursor: pointer;
+}
+
+input[id="menuicon"]+label span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  border-radius: 30px;
+  background: #0c0c0c;
+  opacity: 0.8;
+  transition: all.35s;
+}
+
+input[id="menuicon"]+label span:nth-child(1) {
+  top: 0;
+
+}
+
+input[id="menuicon"]+label span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+input[id="menuicon"]+label span:nth-child(3) {
+  bottom: 0;
+
+}
+
+input[id="menuicon"]:checked+label span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+
+}
+
+input[id="menuicon"]:checked+label span:nth-child(2) {
+  opacity: 0;
+
+}
+
+input[id="menuicon"]:checked+label span:nth-child(3) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+
+}
+
+/*움직이는메뉴버튼종료*/
+/*메뉴버튼눌렀을때 나오는 팝업창 시작 z-index=50번대임*/
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  z-index: 50;
+  transition: all .35s;
+}
+
+input[id="menuicon"]:checked+label+div {
+  right: 0;
+}
+
+input[id="menuicon"]:checked+label {
+  z-index: 51;
+  top: 50px;
+
+
+}
+
+input[id="menuicon"]:checked+label span {
+  background: #f2f2f2;
+  opacity: 1;
+}
+
+/*---메뉴네비게이션종료*/
+/*--스크롤에 따른 게시글--*/
+
+
+/*--스크롤에따른게시글 종료--*/
+.logocontent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  margin-left: 50%;
+
+
+}
+
+.logocontent h2 {
+  position: absolute;
+  color: #03a9f4;
+  transform: translate(-50%, -50%);
+  font-size: 8vw;
+}
+
+.logocontent h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 1px #03a9f4;
+}
+
+.logocontent h2:nth-child(2) {
+  color: 03a9f4;
+  animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+
+  0%,
+  100% {
+    clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
+
+.logocontent h3 {
+  color: rgb(233, 136, 10);
+  position: relative;
+  z-index: 2;
+  font-size: 1vw;
+  top: 11vw;
+  left: 10vw;
+}
+
+
+
+.content1 {
+  background-image: url("./imgList/mainImg/sea1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+}
+
+#vestIntro_h1 {
+  position: absolute;
+  z-index: 1;
+  font-size: 6vw;
+  width: 150px;
+  font-family: sans-serif;
+  top: 75vw;
+  left: 5vw;
+
+}
+
+#vestIntro_p {
+  position: absolute;
+  z-index: 1;
+  font-size: 1vw;
+  width: 800px;
+  font-family: sans-serif;
+  top: 105vw;
+  left: 8vw;
+
+}
+
+@keyframes slideIntro {
+  from {
+    left: -100px;
+    opacity: 0;
+  }
+
+  to {
+    left: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIntro1 {
+  from {
+    left: -8vw;
+    opacity: 0;
+  }
+
+  to {
+    left: 10vw;
+    opacity: 1;
+  }
+}
+
+.content2 {
+  background: linear-gradient(lightCyan, skyBlue, skyBlue);
+}
+
+.content3 {
+  background: linear-gradient(skyBlue, skyBlue, #0dc1e0);
+}
+
+.content4 {
+  
+  background: rgb(12,13,13);
+background: linear-gradient(0deg, rgba(12,13,13,1) 0%, rgba(60,115,115,1) 100%);
+
+}
+#content4_1{
+  background: rgb(60,115,115);
+background: linear-gradient(0deg, rgba(60,115,115,1) 0%, rgba(13,193,224,1) 100%);
+  width: 100%;
+  height: 150px;
+}
+
+
+.path {
+  fill: none;
+  stroke: #f2f2f2;
+  stroke-width: 3px;
+}
+
+.path1 {
+  stroke-dasharray: 5400;
+  animation: drawPath1 1s linear, floating 2.2s linear infinite;
+}
+
+.path2 {
+  stroke: #000;
+
+}
+
+.path3 {
+  stroke: #000;
+}
+
+.path4 {
+  stroke: #000;
+}
+.path5{
+  stroke:rgb(250, 249, 249);
+}
+
+/*.content2 {
+  background-image: url("./newzealand.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}*/
+
+/*개발자사진*/
+#deve_image{
+
+}
+.swiper {
+  width: 400px;
+  height: 550px;
+  position: absolute;
+  left: -35px;
+  top: -287px;
+  margin-left: -150px;
+  margin-top: -150px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+/*개발자사진끝*/
+
+.footer {
+  height: 50vh;
+  background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(12,13,13,1) 100%);
+}
+
+@keyframes drawPath1 {
+  0% {
+    stroke-dashoffset: 5400;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes floating {
+  50% {
+    transform: translate3d(0, 30px, 0);
+  }
+}
+
+/*side 배너 메뉴*/
+.index {
+  width: 60%;
+  height: 100%;
+  position: absolute;
+  vertical-align: middle;
+  padding-top: 278px;
+  
+}
+
+.index_a {
+  padding: 13px;
+  cursor: pointer;
+  font-size: 50px;
+}
+
+.index:hover{
+  color: #e8e8e8;
+  background-color: #0dc1e0;
+}
+/*로그인 css*/
+.login-form {
+  position: absolute;
+
+  right: 0;
+  z-index: 2;
+  /*background-color: rgba(255, 255, 255, 0.7);*/
+  background: #222;
+  opacity: 0.9;
+  /*border-top-left-radius: 30px;*/
+  /*border-radius: 10px;*/
+  width: 40%;
+  height: 100%;
+  padding-top: 7vw;
+  /*padding-bottom: 80px;
+  padding-left: 15px;
+  padding-right: 15px;*/
+
+
+}
+
+#rt {
+  background: rgb(0, 15, 36);
+  background: linear-gradient(90deg, rgba(0, 212, 255, 1) 0%, rgba(9, 60, 121, 0.7651435574229692) 35%, rgba(0, 212, 255, 1) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+
+}
+
+.login-form h1 {
+  font-size: 3vw;
+  color: rgba(255, 255, 255, 0.781);
+  text-align: center;
+  margin-bottom: 5vw;
+}
+
+.int-area {
+  left: 5vw;
+  width: 60%;
+  position: relative;
+  height: 50px;
+  margin-bottom: 3vw;
+
+}
+
+.int-area:first-child {
+  margin-top: 0;
+}
+
+.int-area input {
+  width: 80%;
+
+  padding: 30px 50px 0px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 30px;
+  color: rgb(240, 243, 245);
+  outline: none;
+
+
+
+}
+
+.int-area label {
+  position: absolute;
+  left: 50px;
+  top: 15px;
+  font-size: 15px;
+  color: #999;
+  transition: all .5s ease;
+
+}
+
+/* 아이디,비번 실패시 흔들림*/
+.int-area label.warning {
+  color: red !important;
+  animation: warning .2s ease;
+  animation-iteration-count: 3;
+}
+
+@keyframes warning {
+  0% {
+    transform: translateX(-8px);
+  }
+
+  25% {
+    transform: translateX(8px);
+  }
+
+  50% {
+    transform: translateX(-8px);
+  }
+
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+.int-area input:focus+label,
+.int-area input:valid+label {
+  top: -2px;
+  font-size: 13px;
+  color: #166cea;
+}
+
+.btn-area {
+  margin-top: 3vw;
+  margin-left: 13vw;
+}
+
+.btn-area button {
+
+  width: 50%;
+  height: 50px;
+  background: #166cea;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+.caption a {
+  font-size: 15px;
+  color: #999;
+  text-decoration: none;
+}
+
+.caption a:hover {
+  color: black;
+}
+
+.container {
+  max-width: 800px;
+  max-height: 480px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+/* 로그인 css 종료*/
+/* 회원가입 css 시작 */
+.popupRegister {
+  position: absolute;
+  z-index: -999;
+  left: 50%;
+  top: -50%;
+
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: rgb(34, 65, 193);
+  background: linear-gradient(90deg, rgba(34, 65, 193, 1) 5%, rgba(2, 199, 214, 1) 46%, rgba(16, 180, 120, 1) 92%);
+  border-radius: 5px;
+  text-align: right;
+
+
+  box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.popupRegister a {
+  color: gray;
+  text-decoration: none;
+}
+
+#popupRegister1Close {
+  width: 50px;
+  height: 50px;
+  color: aliceblue;
+  background-color: rgba(5, 247, 207, 0);
+  padding: 0px 10px;
+  font-size: 2rem;
+}
+
+#popupRegister1Close:hover {
+  color: rgb(10, 10, 10);
+  background-color: #ec0b0b;
+}
+
+/* 팝업열기위한 추적*/
+.popupRegister:target {
+  opacity: 1;
+  position: fixed;
+  z-index: 9999;
+
+  top: 50%;
+}
+
+.registerForm {
+  width: 638px;
+  height: 640px;
+  position: fixed;
+  z-index: 2;
+  margin-left: 20px;
+  background: rgb(203, 204, 208);
+  background: radial-gradient(circle, rgba(203, 204, 208, 1) 0%, rgba(246, 240, 241, 1) 100%);
+  border-radius: 5px;
+  padding: 30px 60px 60px;
+}
+
+.registerForm h2 {
+  padding: 0 0 32px;
+  font-weight: normal;
+  font-size: 36px;
+  color: #222;
+  text-align: center;
+  border-bottom: 3px solid #444;
+}
+
+.registerForm .con {
+  padding: 0px 30px;
+  border-bottom: 1px solid #e8e8e8;
+  align-items: center;
+}
+
+table.registerFormTable th {
+  font-size: 20px;
+  color: #222;
+  text-align: center;
+  font-weight: normal;
+}
+
+table.registerForm th span {
+  color: #de4f41;
+}
+
+#blur.active {
+  background: #222;
+  opacity: 1;
+}
+
+#menuiconbar.active {
+  opacity: 0;
+}
+
+.regiinput {
+  width: 200%;
+  height: 60px;
+  color: #373737;
+  font-size: 18px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  text-decoration: none;
+  text-indent: 20px;
+  transition: all 0.5s;
+  vertical-align: middle;
+  border-radius: 5px;
+  margin: 15px 2px 11px;
+}
+
+.regiinput_title {
+  width: 200%;
+  height: 48px;
+  color: #373737;
+  font-size: 23px;
+
+
+
+  border-radius: 5px;
+  margin: 0 0 20px;
+}
+
+#user_type {
+
+  width: 244%;
+  margin: 4px -36px 4px;
+
+}
+
+.regiinput::-webkit-input-placeholder {
+  color: #b5b6b6;
+  font-size: 12px;
+  line-height: 100%;
+}
+
+#agree_impor {
+  color: #de4f41;
+}
+
+#regisubmit {
+  margin-left: 140px;
+  margin-top: 40px;
+
+  width: 350px;
+  height: 80px;
+  background: #de4f41;
+  border: 1px solid #e8e8e8;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#agree_all {
+  position: absolute;
+  width: 80px;
+  height: 23px;
+  right: 40%;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  background: #e8e8e8;
+  border-radius: 5px;
+}
+
+/* 회원가입 css 종료 */
