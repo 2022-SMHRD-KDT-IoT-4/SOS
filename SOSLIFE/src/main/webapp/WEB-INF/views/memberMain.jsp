@@ -22,10 +22,16 @@
 <!--font end-->
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/memberMain.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${cpath}/resources/js/jacket_info.js"></script>
     
 </head>
 
 <body>
+<script type="text/javascript">
+		$(document).ready(
+			loadJacketList()
+		)
+</script>
 	<%
 		tbl_user user = (tbl_user)session.getAttribute("user");
 	%>
@@ -188,49 +194,8 @@
                                         <td>통신상태</td>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr id="reDataA">
-                                        <td>A</td>
-                                        <td><span><ion-icon name="battery-full-outline" style="color:green" width="50px"></ion-icon></span>
-                                            80%</td>
-                                        <td>온도:24 수압:0 물감지:0</td>
-                                        <td><span class="status disconnect">불량</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="reDataB">B</td>
-                                        <td><span><ion-icon name="battery-half-outline" style="color:orange"></ion-icon></span>
-                                            50%</td>
-                                        <td>온도:22 수압:0 물감지:0</td>
-                                        <td><span class="status connect">정상</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>C</td>
-                                        <td><span><ion-icon name="battery-dead-outline" style="color:red"></ion-icon></span>
-                                            10%</td>
-                                        <td>온도:24 수압:0 물감지:0</td>
-                                        <td><span class="status warning">불안</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>D</td>
-                                        <td><span><ion-icon name="battery-half-outline" style="color:orange"></ion-icon></span>
-                                            49%</td>
-                                        <td>온도:23 수압:0 물감지:0</td>
-                                        <td><span class="status good">양호</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>E</td>
-                                        <td><span><ion-icon name="battery-full-outline" style="color:green"></ion-icon></span>
-                                            97%</td>
-                                        <td>온도:23 수압:0 물감지:0</td>
-                                        <td><span class="status good">양호</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>F</td>
-                                        <td><span><ion-icon name="battery-full-outline" style="color:green"></ion-icon></span>
-                                            91%</td>
-                                        <td>온도:23 수압:0 물감지:0</td>
-                                        <td><span class="status connect">정상</span></td>
-                                    </tr>
+                                <tbody id='istbody'>
+                                  
                                 </tbody>
                             </table>
                         </div>

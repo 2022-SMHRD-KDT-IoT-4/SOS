@@ -19,9 +19,11 @@ public class SosController {
 	@Autowired
 	SosMapper mapper;
 	
+	// Index 페이지(초기페이지)로 이동시켜주는 메소드
 	@RequestMapping("/intro.do")
 	public void intro() {}
 	
+	// Login 기능을 수행하는 메소드
 	@RequestMapping("/login.do")
 	public String login(tbl_user user, HttpSession session) {
 		tbl_user result = mapper.UserLogin(user);
@@ -43,6 +45,7 @@ public class SosController {
 		return moveUrl;
 	}
 	
+	// 회원가입 기능을 수행하는 메소드
 	@RequestMapping("/join.do")
 	public String join(tbl_user user) {
 		String moveUrl = "";
@@ -55,12 +58,15 @@ public class SosController {
 		return moveUrl;
 	}
 	
+	// 사용자가 일반회원이였을 경우 memberMain.jsp로 이동시켜주는 메소드
 	@RequestMapping("/memberMain.do")
 	public void memberMain() {}
 	
+	// 구명조끼 등록페이지로 이동시켜주는 메소드
 	@RequestMapping("/registjacket.do")
 	public void registjacket() {}
 	
+	// 구명조끼 등록 정보를 받아 DB에 저장하는 메소드
 	@RequestMapping("/regist_jacket.do")
 	public String registjacket(HttpSession session,tbl_jacket jacket) {
 		int row = 0;

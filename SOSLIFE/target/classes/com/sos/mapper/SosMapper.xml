@@ -2,22 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sos.mapper.SosMapper">
     
+    <!-- 로그인 기능을 위한 DB값 조회(Select) -->
     <select id="UserLogin" parameterType="com.sos.domain.tbl_user" resultType="com.sos.domain.tbl_user">
 		select * from tbl_user where user_id = #{user_id} and user_pw = #{user_pw}
     </select>
+    <!-- 회원가입 정보를 DB에 삽입(Insert) -->
     <insert id="UserJoin" parameterType="com.sos.domain.tbl_user">
 		insert into tbl_user values(#{user_id}, #{user_pw}, #{user_nick}, #{user_type}, sysdate)        
     </insert>
+    <!-- GPS센서 값 DB에 삽입(Insert) -->
     <insert id="gpstest" parameterType="com.sos.domain.tbl_location">
         insert into tbl_location values(tbl_location_SEQ.nextval, 4, #{latitude}, #{longitude})
     </insert>
+    <!-- Water센서 값 DB에 삽입(Insert) -->
     <insert id="watertest" parameterType="com.sos.domain.tbl_water">
          insert into tbl_water(jacket_seq, water_pressure, water_date, water_temperature, water_detect) values(4, #{water_pressure}, sysdate, #{water_temperature}, #{water_detect})
     </insert>
+    <!-- 구명조끼 등록 정보 DB에 삽입(Insert) -->
     <insert id="registjacket" parameterType="com.sos.domain.tbl_jacket">
 		insert into tbl_jacket(user_id, ship_seq, jacket_date, product_id) values(#{user_id}, 4, sysdate, #{product_id})        
     </insert>
-    <select id="getdate" resultType="com.sos.domain.tbl_water">
-        select * from tbl_water
+    <!-- Water센서 DB값 조회(Select) -->
+    <select id="getdate" parameterType="String" resultType="com.sos.domain.tbl_water">
+        select * from tbl_water where jacket_seq = #{jacket_seq} and water_date = (select max(water_date) from tbl_water where jacket_seq=#{jacket_seq})
+    </select>
+    <!-- Jacket 정보 DB값 조회(Select) -->
+    <select id="getjacketinfo" resultType="com.sos.domain.tbl_jacket">
+        select * from tbl_jacket
     </select>
 </mapper>

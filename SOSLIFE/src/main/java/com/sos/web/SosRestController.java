@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sos.domain.tbl_jacket;
 import com.sos.domain.tbl_location;
 import com.sos.domain.tbl_water;
 import com.sos.mapper.SosMapper;
@@ -20,6 +21,7 @@ public class SosRestController {
 	@Autowired
 	SosMapper mapper;
 	
+	// GPS센서의 정보를 받아 DB에 저장하는 메소드
 	@RequestMapping("/gpstest.do")
 	public void gpstest(String data) {
 		String lat_pre[] = data.split("lat\": ");
@@ -31,6 +33,7 @@ public class SosRestController {
 		int row = mapper.gpstest(vo);
 	}
 	
+	// Water센서의 정보를 받아 DB에 저장하는 메소드
 	@RequestMapping("/watertest.do")
 	public void watertest(String data) {
 		System.out.println(data);
@@ -45,17 +48,17 @@ public class SosRestController {
 		System.out.println(row);
 	}
 	
+	// Water센서의 정보를 가져와 전달하는 메소드
 	@RequestMapping("/getdate.do")
-	public ArrayList<tbl_water> MainChart(HttpServletResponse response) {
-		ArrayList<tbl_water> vo = mapper.getdate();
-		try {
-			PrintWriter out = response.getWriter();
-			for(tbl_water result : vo) {
-				out.print(result);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public tbl_water MainChart(String jacket_seq) {
+		tbl_water vo = mapper.getdate(jacket_seq);
+		return vo;
+	}
+	
+	// Jacket의 정보를 가져와 전달하는 메소드
+	@RequestMapping("/getjacketinfo.do")
+	public ArrayList<tbl_jacket> GetJacketInfo(){
+		ArrayList<tbl_jacket> vo = mapper.getjacketinfo();
 		return vo;
 	}
 }
