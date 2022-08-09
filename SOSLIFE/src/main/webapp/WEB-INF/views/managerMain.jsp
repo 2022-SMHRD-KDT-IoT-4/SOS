@@ -44,6 +44,14 @@
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
+                   <li>
+                    <a href="managerNoticeList.do">
+                        <span class="icon">
+                           <ion-icon name="notifications-outline"></ion-icon>
+                        </span>
+                        <span class="title">공지사항</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#">
                         <span class="icon">
@@ -85,7 +93,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="logout.do">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

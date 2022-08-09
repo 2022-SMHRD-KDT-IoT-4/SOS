@@ -5,7 +5,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sos.domain.tbl_jacket;
 import com.sos.domain.tbl_location;
+import com.sos.domain.tbl_notice;
+import com.sos.domain.tbl_user;
 import com.sos.domain.tbl_water;
 import com.sos.mapper.SosMapper;
 
@@ -60,5 +65,40 @@ public class SosRestController {
 	public ArrayList<tbl_jacket> GetJacketInfo(){
 		ArrayList<tbl_jacket> vo = mapper.getjacketinfo();
 		return vo;
+	}
+	
+	@RequestMapping("/applogin.do")
+	public JSONObject AppLogin(tbl_user user, HttpSession session){
+		JSONObject result = new JSONObject();
+		JSONArray jarray = new JSONArray();
+		tbl_user vo = mapper.UserLogin(user);
+		if(vo!=null) {
+			JSONObject row = new JSONObject();
+			row.put("user_id", vo.getUser_id());
+			row.put("user_pw", vo.getUser_pw());
+			row.put("user_nick", vo.getUser_nick());
+			row.put("user_type", vo.getUser_type());
+			row.put("user_joindate", vo.getUser_joindate());
+			System.out.println(row);
+			jarray.add(0,row);
+			result.put("userInfo", jarray);
+		}else {
+			result=null;
+		}
+		return result;
+	}
+	
+	// 안드로이드 회원가입 진행 후 결과 상황 반환 메소드
+	@RequestMapping("/appregist.do")
+	public int AppRegist(tbl_user user) {
+		int row = mapper.UserJoin(user);
+		return row;
+	}
+	
+	// 공지사항 정보를 가져와 전달하는 메소드
+	@RequestMapping("/noticelist.do")
+	public ArrayList<tbl_notice> NoticeList(){
+		ArrayList<tbl_notice> list = mapper.noticelist();
+		return list;
 	}
 }

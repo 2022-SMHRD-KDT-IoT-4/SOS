@@ -3,8 +3,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	// scope(pageContext, request, session, applicaton)
-	pageContext.setAttribute("cpath", request.getContextPath());
+   // scope(pageContext, request, session, applicaton)
+   pageContext.setAttribute("cpath", request.getContextPath());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,18 +23,22 @@
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/memberMain.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${cpath}/resources/js/jacket_info.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
     
 </head>
 
 <body>
 <script type="text/javascript">
-		$(document).ready(
-			loadJacketList()
-		)
+      $(document).ready(
+         loadJacketList()
+      )
 </script>
-	<%
-		tbl_user user = (tbl_user)session.getAttribute("user");
-	%>
+   <%
+      tbl_user user = (tbl_user)session.getAttribute("user");
+   %>
     <div class="container">
         <div class="navigation">
             <ul>
@@ -96,7 +100,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="logout.do">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -165,22 +169,23 @@
               </div>      
 
               <!--Add Chart-->
-              <div class="graphBox">
-                  <div class="box">
-                    <iframe src="http://192.168.243.26:8009/" title="내용" width="100%" height="500px"></iframe>
+              
+             <div class="graphBox">
+                  <!--  --><div class="box">
+                    <iframe src="http://172.30.1.40:5000/" title="내용" width="100%" height="500px"></iframe>
                   </div>
-                  <div class="box">
-                    <canvas id="myChart"></canvas>
+                  <div class="box" id="container">
+                    
+                    
                   </div>
               </div>
-
                     
                     <div class="details">
                         <!--고객 명단list-->
                         <div class="recentOrders">
                             <div class="cardHeader">
                                 <h2>
-                                    <%=user.getUser_nick() %> 님 환영합니다
+                                    <%=user.getUser_nick() %>님 환영합니다
                                 </h2>
                                 <span>제품번호 : 12312412412312312</span>
                                 <a href="#" class="btn">View All</a>
@@ -240,6 +245,7 @@
         <!--chart.js-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
         <script src="${cpath}/resources/js/my_chart.js"></script>
+        <script src="${cpath}/resources/js/chart.js"></script>
         <!--end-->
         <script>
             //MenuToggle
@@ -263,13 +269,10 @@
                 item.addEventListener('mouseover', activeLink))
             
                 
-                //$(document).ready(function (){
-                  // $(function belt_chart(){
-
-                   //}) 
-                //});
+                
                 
         </script>
+        
 </body>
 
 </html>
