@@ -45,7 +45,7 @@ public class SosController {
 		if(result != null) {
 			session.setAttribute("user", result);
 			if(result.getUser_type().equals("구조대")) {
-				moveUrl = "mainPage2";
+				moveUrl = "rescueMain";
 			}else if(result.getUser_type().equals("관리자")){
 				moveUrl = "managerMain";
 			}else {
@@ -61,14 +61,8 @@ public class SosController {
 	// 회원가입 기능을 수행하는 메소드
 	@RequestMapping("/join.do")
 	public String join(tbl_user user) {
-		String moveUrl = "";
 		int row = mapper.UserJoin(user);
-		if(row > 0) {
-			moveUrl = "nextPage";
-		}else {
-			moveUrl = "redirect:/intro.do";
-		}
-		return moveUrl;
+		return "redirect:/intro.do";
 	}
 	
 	// 로그아웃 기능을 수행하는 메소드
@@ -199,34 +193,59 @@ public class SosController {
 		model.addAttribute("noticeone", notice);
 	}
 	
+	// 1:1 문의 페이지로 이동시켜주는 메소드
+	@RequestMapping("/Question.do")
+	public void Question() {}
 	
+	// 1:1 문의 데이터를 가져와 DB에 저장하는 메소드
 	@RequestMapping("/question_insert.do")
-	public String Question(@RequestParam("q_file") MultipartFile file, HttpServletRequest request, @RequestParam("q_subject") String q_subject, @RequestParam("q_content") String q_content, HttpSession session) {
-		String originalFile = file.getOriginalFilename();
-		String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-		String path = "C:\\eGovFrame-3.10.0\\workspace.edu\\SOSLIFEBACKUP\\src\\main\\webapp\\file\\";
-		File files = new File(path + storedFileName);
-		String q_file = path + storedFileName;
-		String user_id = "";
+	public String question_insert(tbl_question question, HttpSession session) {
 		String moveUrl = "";
 		if(session.getAttribute("user")!=null) {
 			tbl_user user = (tbl_user)session.getAttribute("user");
-			user_id = user.getUser_id();
-			try {
-				file.transferTo(files);
-				tbl_question question = new tbl_question(0, q_subject, q_content, q_file, "", user_id);
-				mapper.questionInsert(question);
-				moveUrl = "testBoard";
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			question.setUser_id(user.getUser_id());
+			int row = mapper.questionInsert(question);
+			if(row>0) {
+				if(user.getUser_type().equals("구조대")) {
+					moveUrl = "redirect:/rescueMain.do";
+				}else if(user.getUser_type().equals("일반회원")) {
+					moveUrl = "redirect:/memberMain.do";
+				}
+			}else {
+				moveUrl = "redicrect:/Question.do";
 			}
-		}else {
-			moveUrl = "testBoard";
 		}
+		
 		return moveUrl;
+	}
+	
+	// 구조대 메인페이지 이동시켜주는 메소드
+	@RequestMapping("/rescueMain.do")
+	public void rescueMain() {}
+	
+	// 관리자 메인페이지 이동시켜주는 메소드
+	@RequestMapping("/managerMain.do")
+	public void managerMain() {}
+	
+	// 구조대 문의사항 페이지로 이동시켜주는 메소드
+	@RequestMapping("/rescuequesiton.do")
+	public void rescuequesiton() {}
+	
+	// 관리자 문의사항 페이지 이동시켜주는 메소드
+	@RequestMapping("/managerQuestionList.do")
+	public void managerQuestionList() {}
+	
+	// 관리자 문의사항 세부사항 페이지 이동시켜주는 메소드
+	@RequestMapping("/managerQuestionView.do")
+	public void managetQuestionView() {}
+	
+	// 관리자 문의사항 세부 데이터를 가져와 세부사항 페이지로 이동시켜주는 메소드
+	@RequestMapping("/managerquestiondetail.do")
+	public String managerQuestionDetail(int q_seq, Model model) {
+		tbl_question question = mapper.getquestiondetail(q_seq);
+		model.addAttribute("questionone", question);
+		System.out.println(question);
+		return "managerQuestionView";
 	}
 	
 	@RequestMapping("/as_insert.do")

@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap" rel="stylesheet">
     <!--font end-->
-    <link rel="stylesheet" type="text/css" href="${cpath}/resources/cssnotice.css">
+    <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/notice.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="memberMain.html">
+                    <a href="memberMain.do">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -44,7 +44,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="productRegister.html">
+                    <a href="memberNoticeList.do">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">공지사항</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="registjacket.do">
                         <span class="icon">
                             <ion-icon name="ribbon-outline"></ion-icon>
                         </span>
@@ -52,19 +60,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="Question.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">메신저</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">게시판</span>
+                        <span class="title">문의사항</span>
                     </a>
                 </li>
                 <li>
@@ -76,15 +76,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">비밀번호 변경</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="logout.do">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

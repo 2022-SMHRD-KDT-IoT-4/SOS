@@ -1,9 +1,7 @@
-<%@page import="com.sos.domain.tbl_user"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	// scope(pageContext, request, session, applicaton)
 	pageContext.setAttribute("cpath", request.getContextPath());
 %>
 <!DOCTYPE html>
@@ -20,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap" rel="stylesheet">
 <!--font end-->
-    <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/memberMain.css">
+    <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/rescueTeam.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 </head>
@@ -28,18 +26,18 @@
 <body>
     <div class="container">
         <div class="navigation">
-            <ul>
+             <ul>
                 <li>
                     <a href="#">
                         <span class="icon">
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
-                        <span class="title">Safe Our Savior Manager</span><br>
-                        
+                        <span class="title">Safe Our Savior RescueTeam</span><br>
+
                     </a>
                 </li>
                 <li>
-                    <a href="memberMain.do">
+                    <a href="rescueMain.do">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -47,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="memberNoticeList.do">
+                    <a href="managerNoticeList.do">
                         <span class="icon">
                             <ion-icon name="help-outline"></ion-icon>
                         </span>
@@ -55,21 +53,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="registjacket.do">
-                        <span class="icon">
-                            <ion-icon name="ribbon-outline"></ion-icon>
-                        </span>
-                        <span class="title">제품등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Question.do">
+                    <a href="rescuequesiton.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">문의사항</span>
+                        <span class="title">문의하기</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="#">
                         <span class="icon">
@@ -96,25 +87,53 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
             </div>
-        <form action="regist_jacket.do">
-            <div class="registerBox">
-                <p>제품등록</p> 
-                <div class="registerNum">
-                  <input type="text" name='product_id'><button type="submit" id="sub">등록</button> 
-                </div> 
+            <div class="request_register">
                 
-              </div>
-              <div class="plus">+추가하기</div>
-              <div class="allSub">전체등록</div>
+                <form action="question_insert.do">
+                    <div class="selectStyle">
+                    <div class="row">
+                        
+                        <div class="input-group">
+                            <input type="text" id="name" name='q_name' required>
+                        <label for="name"><ion-icon name="person-outline"></ion-icon>이름</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="number" name='q_phone' required>
+                        <label for="number"><ion-icon name="call-outline"></ion-icon>전화번호</label>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="email" name='q_email' required>
+                    <label for="email"><ion-icon name="mail-outline"></ion-icon>이메일</label>
+                    </div>
+                    <div class="input-group">
+                    <div class="select">
+                    <select id="format" name='q_type'>
+                        <option >================   선택해 주세요   ================</option>
+                        <option value="<구조대>communication">서버 관련</option>
+                        <option value="<구조대>batery">지도 오류</option>
+                        <option value="etc">기타</option>
+                    </select>
+                    </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="" rows="8" name='q_content' required></textarea>
+                    <label for="message"><ion-icon name="chatbubbles-outline"></ion-icon>내용</label>
+                    </div>
+                    <button type="submit">문의하기<ion-icon name="paper-plane-outline"></ion-icon></button>
+                </div>
+                </form>
+              
         </div>
-		</form>
+</div>
 
         <!--아이오닉콘즈 다운로드 절대 /body 앞에 둬야 설치가 되니 이동 X-->
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <!--chart.js-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.2/dist/chart.min.js"></script>
-        <script src="${cpath}/resources/js/my_chart.js"></script>
+        <script src="my_chart.js"></script>
         <!--end-->
         <script>
             //MenuToggle
@@ -143,45 +162,7 @@
 
                    //}) 
                 //});
-            //제품등록 스크립트
-            $(document).ready(function (){
-                $(".plus").click(function(){
-                    var  registerBtn = $("<input type='text'>");
-                    var  removeBtn   = $("<button type='submit'/>").text("X");
-                    var  registerSub = $("<button type='submit'/>").text("등록");
-                    var  registerNum = $("<div/>").append(registerBtn).addClass("registerNum").append(registerSub).append(removeBtn);
-
-                    $(".registerBox").append(registerNum);
-
-                    removeBtn.click(function(e){
-                    registerNum.remove();
-                    });
-
-                    //신규 추가한 시리얼(2행부터)
-                    registerSub.click(function(e){
-                        var submit = $(registerBtn).val();
-                        console.log(submit);
-                    });
-                });
-
-                $("#sub").click(function(e){
-                    var submit1 = $(e.target).prev().val();
-                });
-                
-                //기존 시리얼(1행만)
-                $(".allSub").click(function(){
-                    var allSubmit = $(".registerNum").find("input");
-
-                   // allSubmit.
-                   for( var i = 0; i < allSubmit.length; i++)
-                   {
-                        var serial = $(allSubmit[i]).val();
-
-                        //serial
-                   }
-                   
-                });
-            });  
+            
             
                 
         </script>

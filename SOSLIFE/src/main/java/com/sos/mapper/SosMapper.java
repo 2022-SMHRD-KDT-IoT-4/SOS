@@ -2,6 +2,7 @@ package com.sos.mapper;
 
 import java.util.ArrayList;
 
+import com.sos.domain.android_jacketinfo;
 import com.sos.domain.tbl_as;
 import com.sos.domain.tbl_jacket;
 import com.sos.domain.tbl_location;
@@ -24,7 +25,7 @@ public interface SosMapper {
 	// Water 센서가 저장되있는 DB에서 정보를 가져오는 메소드
 	public tbl_water getdate(String jacket_seq);
 	// Jacket의 정보가 저장되있는 DB에서 정보를 가져오는 메소드
-	public ArrayList<tbl_jacket> getjacketinfo();
+	public ArrayList<tbl_jacket> getjacketinfo(String user_id);
 	// 공지사항 입력 정보를 받아 DB에 삽입하는 메소드
 	public int noticeInsert(tbl_notice notice);
 	// 질문사항 입력 정보를 받아 DB에 삽입하는 메소드
@@ -39,4 +40,16 @@ public interface SosMapper {
 	public int noticeUpdate(tbl_notice notice);
 	// 공지사항 조회수 증가 메소드
 	public int noticeCount(int notice_seq);
+	// 1:1문의 정보 조회 메소드
+	public ArrayList<tbl_question> managerMainList();
+	// Jacket 사용하는 유저 정보를 가져오는 메소드
+	public ArrayList<tbl_jacket> getjacketuseuser();
+	// 안드로이드 구명조끼 정보 조회 메소드
+	public ArrayList<android_jacketinfo> androidJacketInfo(String user_id);
+	// 해당 사용자의 Jacket 정보를 가져오는 메소드
+	public ArrayList<tbl_jacket> getjacketinfodetail(String user_id);
+	// 문의사항 정보 조회 메소드
+	public ArrayList<tbl_question> getquestioninfo();
+	// 문의사항 세부 정보 조회 메소드
+	public tbl_question getquestiondetail(int q_seq);
 }

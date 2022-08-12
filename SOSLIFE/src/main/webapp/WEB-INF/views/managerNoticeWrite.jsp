@@ -37,19 +37,18 @@
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
                         <span class="title">Safe Our Savior Manager</span><br>
-
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="managerMain.do">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Dashboard</span>
+                        <span class="title">홈</span>
                     </a>
                 </li>
                    <li>
-                    <a href="#">
+                    <a href="managerNoticeList.do">
                         <span class="icon">
                            <ion-icon name="notifications-outline"></ion-icon>
                         </span>
@@ -57,27 +56,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Customers</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="managerQuestionList.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">Message</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">Help</span>
+                        <span class="title">문의사항</span>
                     </a>
                 </li>
                 <li>
@@ -85,19 +68,11 @@
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Settings</span>
+                        <span class="title">설정</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="logout.do">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

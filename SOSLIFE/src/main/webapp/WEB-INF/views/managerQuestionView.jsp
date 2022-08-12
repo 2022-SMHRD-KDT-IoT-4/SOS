@@ -1,3 +1,4 @@
+<%@page import="com.sos.domain.tbl_question"%>
 <%@page import="com.mysql.cj.protocol.x.Notice"%>
 <%@page import="com.sos.domain.tbl_notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -27,8 +28,9 @@ pageContext.setAttribute("cpath", request.getContextPath());
 <link rel="stylesheet" type="text/css"
 	href="${cpath}/resources/css/notice.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="${cpath}/resources/js/question_info.js"></script>
 <%
-	tbl_notice notice = (tbl_notice) request.getAttribute("noticeone");
+	tbl_question question = (tbl_question) request.getAttribute("questioneone");
 %>
 </head>
 
@@ -107,38 +109,38 @@ pageContext.setAttribute("cpath", request.getContextPath());
 			<!--notice 시작-->
 			<div class="board_wrap">
 				<div class="board_title">
-					<strong>공지사항</strong>
-					<p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+					<strong>문의사항</strong>
 				</div>
 				<div class="board_view_wrap">
-					<div class="board_view" id='notice_one'>
-						<div class="title">${noticeone.getNotice_subject()}</div>
+					<div class="board_view" id='question_one'>
+					<script type="text/javascript">
+						console.log('${questionone}')
+					</script>
+						<div class="title">${questionone.getQ_type()}</div>
 						<div class="info">
 							<dl>
 								<dt>번호</dt>
-								<dd>${noticeone.getNotice_seq()}</dd>
+								<dd>${questionone.getQ_seq()}</dd>
 							</dl>
 							<dl>
 								<dt>글쓴이</dt>
-								<dd>${noticeone.getNotice_id()}</dd>
+								<dd>${questionone.getUser_id()}</dd>
 							</dl>
 							<dl>
 								<dt>작성일</dt>
-								<dd>${noticeone.getNotice_date()}</dd>
+								<dd>${questionone.getQ_date()}</dd>
 							</dl>
 							<dl>
-								<dt>조회</dt>
-								<dd>${noticeone.getNotice_count()}</dd>
+								<dt>이메일</dt>
+								<dd>${questionone.getQ_email()}</dd>
 							</dl>
 						</div>
 						<div class="cont">
-							${noticeone.getNotice_content()}
+							${questionone.getQ_content()}
 						</div>
 					</div>
 					<div class="bt_wrap">
-						<a href="managerNoticeList.do" class="on">목록</a>
-						<a href="managerNoticeEdit.do?notice_seq=${noticeone.getNotice_seq()}">수정</a>
-
+						<a href="managerQuestionList.do" class="on">목록</a>
 					</div>
 				</div>
 			</div>

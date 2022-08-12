@@ -28,7 +28,7 @@
     </select>
     <!-- Jacket 정보 DB값 조회(Select) -->
     <select id="getjacketinfo" resultType="com.sos.domain.tbl_jacket">
-        select * from tbl_jacket
+        select * from tbl_jacket where user_id = #{user_id}
     </select>
     <!-- 공지사항 정보 DB에 삽입 -->
     <insert id="noticeInsert" parameterType="com.sos.domain.tbl_notice">
@@ -36,7 +36,7 @@
     </insert>
     <!-- 질문사항 정보 DB에 삽입 -->
     <insert id="questionInsert" parameterType="com.sos.domain.tbl_question">
-        insert into tbl_question(q_subject, q_content, q_file, q_date, user_id) values(#{q_subject}, #{q_content}, #{q_file}, sysdate, #{user_id})
+        insert into tbl_question(q_name, q_email, q_content, q_phone, q_date, user_id, q_type) values(#{q_name}, #{q_email}, #{q_content}, #{q_phone}, sysdate, #{user_id}, #{q_type})
     </insert>
     <!-- AS 정보 DB에 삽입 -->
     <insert id="asInsert" parameterType="com.sos.domain.tbl_as">
@@ -58,4 +58,28 @@
     <update id="noticeCount">
         update tbl_notice set notice_count = notice_count+1
     </update>
+    <!-- 1:1문의 정보 조회 (Select) -->
+    <select id="managerMainList" resultType="com.sos.domain.tbl_question">
+        select * from tbl_question
+    </select>
+    <!-- 안드로이드 자켓 정보 조회 (Select) -->
+    <select id="androidJacketInfo" resultType="com.sos.domain.android_jacketinfo">
+        select TJ.product_id, TW.water_pressure, TW.water_temperature, TW.water_detect from (SELECT water_pressure, water_temperature, water_detect, water_date, jacket_seq, RANK() OVER(PARTITION BY jacket_seq ORDER BY water_date desc) AS RNK FROM TBL_WATER) TW , TBL_JACKET TJ WHERE TW.JACKET_SEQ = TJ.JACKET_SEQ AND RNK = 1 AND user_id = #{user_id}
+    </select>
+    <!-- Jacket 사용자 Jacket 갯수 조회 (Select) -->
+    <select id="getjacketuseuser" resultType="com.sos.domain.tbl_jacket">
+        select distinct user_id, count(*) as jacket_seq from tbl_jacket group by user_id
+    </select>
+    <!-- 해당 사용자 Jacket 정보 조회 (Select) -->
+    <select id="getjacketinfodetail" parameterType="String" resultType="com.sos.domain.tbl_jacket">
+        select * from tbl_jacket where user_id = #{user_id}
+    </select>
+    <!-- 문의사항 정보 조회 (Select) -->
+    <select id="getquestioninfo" resultType="com.sos.domain.tbl_question">
+        select * from tbl_question
+    </select>
+    <!-- 문의사항 세부 정보 조회 (Select) -->
+    <select id="getquestiondetail" resultType="com.sos.domain.tbl_question">
+        select * from tbl_question where q_seq = #{q_seq}
+    </select>
 </mapper>

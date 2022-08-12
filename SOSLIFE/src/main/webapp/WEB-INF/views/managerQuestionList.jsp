@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	// scope(pageContext, request, session, applicaton)
 	pageContext.setAttribute("cpath", request.getContextPath());
 %>
 <!DOCTYPE html>
@@ -20,48 +21,44 @@
     <!--font end-->
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/notice.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="${cpath}/resources/js/notice_info.js"></script>
+    <script src="${cpath}/resources/js/question_info.js"></script>
 </head>
 
 <body>
+	<script type="text/javascript">
+    	$(document).ready(function(){
+	    	GetQuestionList()
+	    });
+    </script>
     <div class="container">
         <div class="navigation">
-            <ul>
+             <ul>
                 <li>
                     <a href="#">
                         <span class="icon">
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
                         <span class="title">Safe Our Savior Manager</span><br>
-                        
                     </a>
                 </li>
                 <li>
-                    <a href="memberMain.do">
+                    <a href="managerMain.do">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">전체보기</span>
+                        <span class="title">홈</span>
                     </a>
                 </li>
-                <li>
-                    <a href="memberNoticeList.do">
+                   <li>
+                    <a href="managerNoticeList.do">
                         <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
+                           <ion-icon name="notifications-outline"></ion-icon>
                         </span>
                         <span class="title">공지사항</span>
                     </a>
                 </li>
                 <li>
-                    <a href="registjacket.do">
-                        <span class="icon">
-                            <ion-icon name="ribbon-outline"></ion-icon>
-                        </span>
-                        <span class="title">제품등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="Question.do">
+                    <a href="managerQuestionList.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -81,7 +78,7 @@
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title">로그아웃</span>
+                        <span class="title">Sign Out</span>
                     </a>
                 </li>
             </ul>
@@ -102,25 +99,24 @@
                 </div>
                 <!--userImg-->
                 <div class="user">
-                    <img src="/imgList/mainImg/user.PNG">
+                    <img src="${cpath}/resources/imgList/mainImg/user.PNG">
                 </div>
             </div>
             <!--notice 시작-->
             <div class="board_wrap">
                 <div class="board_title">
-                    <strong>공지사항</strong>
-                    <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+                    <strong>문의사항</strong>
                 </div>
                 <div class="board_list_wrap">
                     <div class="board_list">
                         <div class="top">
                             <div class="num">번호</div>
-                            <div class="title">제목</div>
+                            <div class="title">문의내용</div>
+                            <div class="count">문의종류</div>
                             <div class="writer">글쓴이</div>
                             <div class="date">작성일</div>
-                            <div class="count">조회</div>
                         </div>
-                       <div id='notice_div'>
+                        <div id='question_div'>
                       
                         </div>
                     </div>
@@ -135,39 +131,5 @@
                         <a href="#" class="bt next">></a>
                         <a href="#" class="bt last">>></a>
                     </div>
-                    
                 </div>
             </div>
-
-
-        </div>
-    </div>
-
-
-    <!--아이오닉콘즈 다운로드 절대 /body 앞에 둬야 설치가 되니 이동 X-->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>
-        //MenuToggle
-        let toggle = document.querySelector('.toggle');
-        let navigation = document.querySelector('.navigation');
-        let main = document.querySelector('.main');
-
-        toggle.onclick = function () {
-            navigation.classList.toggle('active');
-            main.classList.toggle('active');
-        }
-
-        //add hovered class in selected list item
-        let list = document.querySelectorAll('.navigation li');
-        function activeLink() {
-            list.forEach((item) =>
-                item.classList.remove('hovered'));
-            this.classList.add('hovered');
-        }
-        list.forEach((item) =>
-            item.addEventListener('mouseover', activeLink))
-    </script>
-</body>
-
-</html>

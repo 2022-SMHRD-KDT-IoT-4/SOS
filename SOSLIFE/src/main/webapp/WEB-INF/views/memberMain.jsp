@@ -17,9 +17,9 @@
     <link href="${cpath}/resources//imgList/lifeJacket.png" rel="shortcut icon" type="image/x-icon">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap" rel="stylesheet">
-<!--font end-->
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap" rel="stylesheet">
+	<!--font end-->
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/memberMain.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${cpath}/resources/js/jacket_info.js"></script>
@@ -31,14 +31,15 @@
 </head>
 
 <body>
-<script type="text/javascript">
-      $(document).ready(
-         loadJacketList()
-      )
-</script>
    <%
       tbl_user user = (tbl_user)session.getAttribute("user");
    %>
+   <script type="text/javascript">
+      $(document).ready(function(){
+    	loadJacketList('${user.getUser_id()}');
+    	LoadNoticeList();
+      });
+	</script>
     <div class="container">
         <div class="navigation">
             <ul>
@@ -60,6 +61,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="memberNoticeList.do">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">공지사항</span>
+                    </a>
+                </li>
+                <li>
                     <a href="registjacket.do">
                         <span class="icon">
                             <ion-icon name="ribbon-outline"></ion-icon>
@@ -68,19 +77,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="Question.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">메신저</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">게시판</span>
+                        <span class="title">문의사항</span>
                     </a>
                 </li>
                 <li>
@@ -89,14 +90,6 @@
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
                         <span class="title">설정</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">비밀번호 변경</span>
                     </a>
                 </li>
                 <li>
@@ -187,8 +180,6 @@
                                 <h2>
                                     <%=user.getUser_nick() %>님 환영합니다
                                 </h2>
-                                <span>제품번호 : 12312412412312312</span>
-                                <a href="#" class="btn">View All</a>
                             </div>
                             <table>
                                 <thead>
@@ -208,28 +199,12 @@
                         <div class="recentCustomers">
                             <div class="cardHeader">
                                 <h2>공지 사항</h2>
+                                <a href="memberNoticeList.do" class="btn">View All</a>
                             </div>
                                 <table>
-                                    <tr>
-                                        <td width="60px">2022.08.02</td>
-                                        <td><h4>관리자<br><span>통신 업데이트 하였습니다.</span></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="60px">2022.07.29</td>
-                                        <td><h4>관리자<br><span>모듈 업데이트 하였습니다.</span></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="60px">2022.07.16</td>
-                                        <td><h4>관리자<br><span>AS일정이 늦어짐을 공지합니다.</span></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="60px">2022.07.16</td>
-                                        <td><h4>관리자<br><span>신규 제품을 소개합니다 !</span></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="60px">2022.07.14</td>
-                                        <td><h4>관리자<br><span>07.15 서버점검 1시간 서버점검이 있습니다.</span></h4></td>
-                                    </tr>
+                                	<tbody id='noticetbody'>
+                                    
+                                    </tbody>
                                 </table>
                         </div>
                         

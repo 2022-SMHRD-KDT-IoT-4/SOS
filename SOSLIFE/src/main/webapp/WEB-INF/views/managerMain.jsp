@@ -21,9 +21,15 @@
 <!--font end-->
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/managerMain.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${cpath}/resources/js/jacket_info.js"></script>
 </head>
 
 <body>
+	<script type="text/javascript">
+      $(document).ready(function(){
+    	  LoadJacketInfo()
+      });
+	</script>
     <div class="container">
         <div class="navigation">
             <ul>
@@ -33,15 +39,14 @@
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
                         <span class="title">Safe Our Savior Manager</span><br>
-                        
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="managerMain.do">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
-                        <span class="title">Dashboard</span>
+                        <span class="title">홈</span>
                     </a>
                 </li>
                    <li>
@@ -53,27 +58,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Customers</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <a href="managerQuestionList.do">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">Message</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="help-outline"></ion-icon>
-                        </span>
-                        <span class="title">Help</span>
+                        <span class="title">문의사항</span>
                     </a>
                 </li>
                 <li>
@@ -81,15 +70,7 @@
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
+                        <span class="title">설정</span>
                     </a>
                 </li>
                 <li>
@@ -168,54 +149,14 @@
                                 <h2>
                                     현재 사용자
                                 </h2>
-                                <a href="#" class="btn">View All</a>
+                               
                             </div>
                             <table>
-                                <thead>
-                                    <tr>
-                                        <td>고객명</td>
-                                        <td>등록일자</td>
-                                        <td>제품번호</td>
-                                        <td>통신상태</td>
-                                    </tr>
+                                <thead id="istthead">
+                                   
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>박종현 님</td>
-                                        <td>22.08.01</td>
-                                        <td>1509-f1s1-d1w1-r2zs</td>
-                                        <td><span class="status disconnect">불량</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>김철민 님</td>
-                                        <td>22.07.30</td>
-                                        <td>1417-f1r1ts-rt1q-qszz</td>
-                                        <td><span class="status connect">정상</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>서찬종 님</td>
-                                        <td>22.07.15</td>
-                                        <td>1080-bt1r-1q1zs-1r8t</td>
-                                        <td><span class="status warning">불안</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>박원 님</td>
-                                        <td>22.08.05</td>
-                                        <td>1234-d1rt-1r1q-542z</td>
-                                        <td><span class="status good">양호</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Refrigerator</td>
-                                        <td>$1200</td>
-                                        <td>paid</td>
-                                        <td><span class="status delivered">delivered</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Refrigerator</td>
-                                        <td>$1200</td>
-                                        <td>paid</td>
-                                        <td><span class="status delivered">delivered</span></td>
-                                    </tr>
+                                <tbody id="isttbody">
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -223,6 +164,7 @@
                         <div class="recentCustomers">
                             <div class="cardHeader">
                                 <h2>문의 사항</h2>
+                                 <a href="#" class="btn">View All</a>
                             </div>
                                 <table>
                                     <tr>
