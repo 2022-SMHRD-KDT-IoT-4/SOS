@@ -48,7 +48,7 @@
                         <span class="icon">
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
-                        <span class="title">Safe Our Savior Manager</span><br>
+                        <span class="title">Safe Our Savior Member</span><br>
                         
                     </a>
                 </li>

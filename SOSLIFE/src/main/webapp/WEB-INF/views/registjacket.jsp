@@ -34,7 +34,7 @@
                         <span class="icon">
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
-                        <span class="title">Safe Our Savior Manager</span><br>
+                        <span class="title">Safe Our Savior Member</span><br>
                         
                     </a>
                 </li>
@@ -98,14 +98,24 @@
             </div>
         <form action="regist_jacket.do">
             <div class="registerBox">
-                <p>제품등록</p> 
+            <div class="registerImg">
+                <p>제품등록하기</p>
+                <img src="/web/resources/imgList/productjacket.png" id="pd_img">
+            </div> 
                 <div class="registerNum">
-                  <input type="text" name='product_id'><button type="submit" id="sub">등록</button> 
+                   <input type="text" class="register_text" placeholder="●●●● 4자리" name="registerNum1" id="register_Num1">&nbsp;-&nbsp;<input type="text"
+                        class="register_text" placeholder="●●●● 4자리" name="registerNum2" >&nbsp;-&nbsp;<input type="text"
+                        class="register_text" placeholder="●●●● 4자리" name="registerNum3" >&nbsp;-&nbsp;<input type="text"
+                        class="register_text" placeholder="●●●● 4자리" name="registerNum4" >
+                    <button type="submit" class="pd_btn">등록</button>
                 </div> 
                 
+              
+              <div class="btn_set">
+              <div class="plus" id="plus" name="plus">추가하기</div>
+              <div class="allSub" id="allSub">전체등록</div>
               </div>
-              <div class="plus">+추가하기</div>
-              <div class="allSub">전체등록</div>
+              </div>
         </div>
 		</form>
 
@@ -146,9 +156,9 @@
             //제품등록 스크립트
             $(document).ready(function (){
                 $(".plus").click(function(){
-                    var  registerBtn = $("<input type='text'>");
-                    var  removeBtn   = $("<button type='submit'/>").text("X");
-                    var  registerSub = $("<button type='submit'/>").text("등록");
+                    var  registerBtn = $("<input type='text' class='register_text' placeholder='●●●● 4자리' name='registerNum1'>&nbsp;-&nbsp;<input type='text' class='register_text' placeholder='●●●● 4자리' name='registerNum2'>&nbsp;-&nbsp;<input type='text' class='register_text' placeholder='●●●● 4자리' name='registerNum3'>&nbsp;-&nbsp;<input type='text' class='register_text' placeholder='●●●● 4자리'> name='registerNum4'");
+                    var  removeBtn   = $("<button type='submit' class='pd_close'/>").text("X");
+                    var  registerSub = $("<button type='submit' class='pd_btn'/>").text("등록");
                     var  registerNum = $("<div/>").append(registerBtn).addClass("registerNum").append(registerSub).append(removeBtn);
 
                     $(".registerBox").append(registerNum);
