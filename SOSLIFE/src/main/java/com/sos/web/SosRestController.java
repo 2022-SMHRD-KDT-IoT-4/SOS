@@ -2,6 +2,7 @@ package com.sos.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sos.domain.android_jacketinfo;
 import com.sos.domain.tbl_jacket;
+import com.sos.domain.tbl_jacket_location;
 import com.sos.domain.tbl_location;
 import com.sos.domain.tbl_notice;
+import com.sos.domain.tbl_power;
 import com.sos.domain.tbl_question;
 import com.sos.domain.tbl_user;
 import com.sos.domain.tbl_water;
+import com.sos.domain.userJacketUseInfo;
 import com.sos.mapper.SosMapper;
 
 @RestController
@@ -46,15 +50,29 @@ public class SosRestController {
 	public void watertest(String resultwater, String resultgps) {
 		System.out.println(resultwater);
 		System.out.println(resultgps);
-		/*String water_pre[] = data.split("r\": \"");
-		String water_result[] = water_pre[1].split("\",");
-		String pres_pre[] = water_result[1].split("es\": \"");
+		String pres_pre[] = resultwater.split("ss\": \"");
 		String pres_result[] = pres_pre[1].split("\", ");
-		String temp_pre[] = water_result[2].split("p\": \"");
-		String temp_result[] = temp_pre[1].split("\"}");
-		tbl_water vo = new tbl_water(0,4,Double.parseDouble(pres_result[0]),"",Double.parseDouble(temp_result[0]),Double.parseDouble(water_result[0]));
-		int row = mapper.watertest(vo);	
-		System.out.println(row);*/
+		String temp_pre[] = pres_result[1].split("re\": \"");
+		String temp_result = temp_pre[1];
+		String water_pre[] = pres_result[2].split("el\": \"");
+		String water_result = water_pre[1];
+		String connect_pre[] = pres_result[3].split("on\": \"");
+		String connect_result = connect_pre[1];
+		String latitude_pre[] = resultgps.split("at\": ");
+		String latitude_result[] = latitude_pre[1].split(", \"");
+		String longitude_pre[] = latitude_result[1].split("og\": ");
+		String longitude_result = longitude_pre[1].replace("}", "");
+		tbl_water vo = new tbl_water(0,4,Double.parseDouble(pres_result[0]),"",Double.parseDouble(temp_result),Double.parseDouble(water_result));
+		tbl_jacket_location location = new tbl_jacket_location(0, Double.parseDouble(latitude_result[0]), Double.parseDouble(longitude_result), "", 4);
+		mapper.watertest(vo);	
+		mapper.jacketLocationInsert(location);
+		if(Integer.parseInt(connect_result)>0) {
+			tbl_power power = new tbl_power(0, 4, "Y", "");
+			mapper.connectInsert(power);
+		}else {
+			tbl_power power = new tbl_power(0, 4, "N", "");
+			mapper.connectInsert(power);
+		}
 	}
 	
 	// Water센서의 정보를 가져와 전달하는 메소드
@@ -184,6 +202,105 @@ public class SosRestController {
 			jarray.add(i,row);
 		}
 		result.put("androidjacketlist", jarray);
+		return result;
+	}
+	
+	// 안드로이드 구조대 메인페이지 구명조끼 위치 정보 전달 메소드
+	@RequestMapping("/rescuejacketinfo.do")
+	public JSONObject RescueJacketInfo(tbl_jacket_location location) {
+		JSONObject result = new JSONObject();
+		JSONArray jarray = new JSONArray();
+		tbl_jacket_location recode_location = mapper.getRecodeLocation(location);
+		JSONObject row = new JSONObject();
+		row.put("jl_seq", recode_location.getJl_seq());
+		row.put("jacket_seq", recode_location.getJacket_seq());
+		row.put("jl_latitude", recode_location.getJl_latitude());
+		row.put("jl_longitude", recode_location.getJl_longitude());
+		row.put("jl_date", recode_location.getJl_date());
+		System.out.println(row);
+		jarray.add(0,row);
+		result.put("jacket_location", jarray);
+		return result;
+	}
+	
+	// 안드로이드 사용자별 구명조끼 수, 문의사항 수 정보 전달 메소드
+	@RequestMapping("/getjacketquestioninfo.do")
+	public JSONObject getJacketQuestionInfo() {
+		JSONObject result = new JSONObject();
+		JSONArray jarray = new JSONArray();
+		ArrayList<userJacketUseInfo> list = mapper.getUserJacketUseInfo();
+		for(int i=0; i<list.size(); i++) {
+			JSONObject row = new JSONObject();
+			userJacketUseInfo vo = list.get(i);
+			row.put("user_id", vo.getUser_id());
+			row.put("jacket_count", vo.getJacket_count());
+			row.put("question_count", vo.getQuestion_count());
+			System.out.println(row);
+			jarray.add(i,row);
+		}
+		result.put("jacket_question", jarray);
+		return result;
+	}
+	
+	// 안드로이드 일반회원 해당 구명조끼 정보 전달 메소드
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/getjacketdetailinfo.do")
+	public JSONObject getJacketDetailInfo(String user_id) {
+		JSONObject result = new JSONObject();
+		JSONArray jarray = new JSONArray();
+		Random rd = new Random();
+		String[] con = {"정상", "불량"};
+		ArrayList<tbl_water> list = mapper.UserJacketDetailInfo(user_id);
+		ArrayList<tbl_jacket> product_id = mapper.UserJacketProductId(user_id);
+		for(int i=0; i<list.size(); i++) {	
+			int value = rd.nextInt(100)+1;
+			String bat = value+"";
+			int value1 = rd.nextInt(1);
+			JSONObject row = new JSONObject();
+			tbl_water vo = list.get(i);
+			tbl_jacket vo2 = product_id.get(i);
+			row.put("jacket_seq", vo.getJacket_seq());
+			row.put("water_date", vo.getWater_date());
+			row.put("water_detect", vo.getWater_detect());
+			row.put("water_pressure", vo.getWater_pressure());
+			row.put("water_seq", vo.getWater_seq());
+			row.put("water_temperature", vo.getWater_temperature());
+			row.put("batteryStatus", bat);
+			row.put("connectStatus", con[value1]);
+			row.put("product_id", vo2.getProduct_id());
+			System.out.println(row);
+			jarray.add(i,row);
+			result.put("jacketdetailinfo", jarray);
+		}
+		return result;
+	}
+	
+	// 안드로이드 일반회원 구명조끼 상세사항 차트 관련 메소드
+	@RequestMapping("/getchartInfo.do")
+	public JSONObject JacketDetailInfo(String user_id) {
+		JSONObject result = new JSONObject();
+		JSONArray jarray = new JSONArray();
+		Random rd = new Random();
+		String[] con = {"정상", "불량"};
+		ArrayList<tbl_water> list = mapper.userJacketDetailInfo2(user_id);
+		for(int i=0; i<list.size(); i++) {	
+			int value = rd.nextInt(100)+1;
+			String bat = value+"";
+			int value1 = rd.nextInt(1);
+			JSONObject row = new JSONObject();
+			tbl_water vo = list.get(i);
+			row.put("jacket_seq", vo.getJacket_seq());
+			row.put("water_date", vo.getWater_date());
+			row.put("water_detect", vo.getWater_detect());
+			row.put("water_pressure", vo.getWater_pressure());
+			row.put("water_seq", vo.getWater_seq());
+			row.put("water_temperature", vo.getWater_temperature());
+			row.put("batteryStatus", bat);
+			row.put("connectStatus", con[value1]);
+			System.out.println(row);
+			jarray.add(i,row);
+			result.put("jacketdetailinfo", jarray);
+		}
 		return result;
 	}
 }

@@ -96,6 +96,7 @@
             </div>
             <div class="request_register">
                 <form action="question_insert.do">
+                	<div class="selectStyle">
                     <div class="row">
                         <div class="input-group">
                             <input type="text" id="name" name="q_name" required>

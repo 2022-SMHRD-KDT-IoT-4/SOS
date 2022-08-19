@@ -82,4 +82,36 @@
     <select id="getquestiondetail" resultType="com.sos.domain.tbl_question">
         select * from tbl_question where q_seq = #{q_seq}
     </select>
+    <!-- 구명조끼 위치 DB에 삽입 -->
+    <insert id="jacketLocationInsert" parameterType="com.sos.domain.tbl_jacket_location">
+        insert into tbl_jacket_location(jl_latitude, jl_longitude, jl_date, jacket_seq) values(#{jl_latitude}, #{jl_longitude}, sysdate, #{jacket_seq})
+    </insert>
+    <!-- 연결상태 DB에 삽입 -->
+    <insert id="connectInsert" parameterType="com.sos.domain.tbl_power">
+        insert into tbl_power(jacket_seq, power_yn, power_date) values(#{jacket_seq}, #{power_yn}, sysdate)
+    </insert>
+    <!-- 구명조끼 위치  조회 (Select) : 최근 이력 정보 조회-->
+    <select id="getRecodeLocation" parameterType="com.sos.domain.tbl_jacket_location" resultType="com.sos.domain.tbl_jacket_location">
+        select * from tbl_jacket_location where jl_date = (select max(jl_date) from tbl_jacket_location where jacket_seq=#{jacket_seq})
+    </select>
+    <!-- 사용자별 구명조끼, 문의사항 수 조회 (Select) -->
+    <select id="getUserJacketUseInfo" resultType="com.sos.domain.userJacketUseInfo">
+        select tj.user_id, jacket_count, question_count 
+        from 
+			(select count(user_id) as jacket_count, user_id from tbl_jacket group by user_id) tj, 
+			(select count(user_id) as question_count, user_id from tbl_question group by user_id) tq 
+		where tj.user_id = tq.user_id
+    </select>
+    <!-- 사용자 구명조끼(센서값) 상세정보 조회 (Select) -->
+    <select id="UserJacketDetailInfo" parameterType="String" resultType="com.sos.domain.tbl_water">
+       select * from tbl_water where water_date in (select max(water_date) water_date from tbl_water where jacket_seq in (select jacket_seq from tbl_jacket where user_id=#{user_id}) group by jacket_seq) order by jacket_seq
+    </select>
+    <!-- 사용자 구명조끼 식별번호 조회 (Select) -->
+    <select id="UserJacketProductId" parameterType="String" resultType="com.sos.domain.tbl_jacket">
+        select * from tbl_jacket where user_id = #{user_id} order by jacket_seq
+    </select>
+    <!-- 사용자 구명조끼 상세정보 조회 (Select) -->
+    <select id="userJacketDetailInfo2" parameterType="String" resultType="com.sos.domain.tbl_water">
+        select * from tbl_water where jacket_seq = 4
+    </select>
 </mapper>

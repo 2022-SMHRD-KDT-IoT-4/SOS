@@ -48,7 +48,7 @@
                         <span class="icon">
                             <ion-icon name="bulb-outline"></ion-icon>
                         </span>
-                        <span class="title">Safe Our Savior Member</span><br>
+                        <span class="title">Safe Our Savior Manager</span><br>
                         
                     </a>
                 </li>
@@ -109,17 +109,7 @@
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-                <!-- search-->
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
-                <!--userImg-->
-                <div class="user">
-                    <img src="${cpath}/resources/imgList/mainImg/user.PNG">
-                </div>
+               
             </div>
             <!-- cards-->
             <div class="cardBox">
@@ -165,7 +155,7 @@
               
              <div class="graphBox">
                   <!--  --><div class="box">
-                    <iframe src="http://172.30.1.40:5000/" title="내용" width="100%" height="500px"></iframe>
+                    <iframe src="http://172.30.1.38:5000/" title="내용" width="100%" height="500px"></iframe>
                   </div>
                   <div class="box" id="container">
                     

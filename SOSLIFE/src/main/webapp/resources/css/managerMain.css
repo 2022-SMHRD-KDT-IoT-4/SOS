@@ -252,7 +252,7 @@ body{
     grid-gap: 30px;
     /*margin-top: 10px;*/
 }
-.details .recentOrders{
+.details{
     position:relative;
     display: grid;
     padding: 20px;
@@ -261,6 +261,15 @@ body{
     box-shadow: 0 7px 25px rgba(0,0,0,0.08);
     border-radius: 20px;
     
+}
+.recentOrders{
+   position:relative;
+    
+    padding: 20px;
+    min-height: 500px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
 }
 .cardHeader{
     display: flex;
@@ -340,7 +349,6 @@ body{
 }
 .recentCustomers{
     position: relative;
-    display: grid;
     min-height: 500px;
     padding: 20px;
     background: var(--white);

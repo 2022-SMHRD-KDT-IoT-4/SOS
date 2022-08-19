@@ -82,19 +82,23 @@ public class SosController {
 	
 	// 구명조끼 등록 정보를 받아 DB에 저장하는 메소드
 	@RequestMapping("/regist_jacket.do")
-	public String registjacket(HttpSession session,tbl_jacket jacket) {
+	public String registjacket(HttpSession session, String registerNum1, String registerNum2, String registerNum3, String registerNum4) {
 		int row = 0;
 		String moveUrl = "";
 		if(session.getAttribute("user")==null) {
 			moveUrl = "intro";
 		}else {
 			tbl_user user = (tbl_user)session.getAttribute("user");
+			tbl_jacket jacket = new tbl_jacket();
+			String product_id = registerNum1+"-"+registerNum2+"-"+registerNum3+"-"+registerNum4;
+			System.out.println(product_id);
 			jacket.setUser_id(user.getUser_id());
+			jacket.setProduct_id(product_id);
 			row = mapper.registjacket(jacket);
 			if(row>0) {
 				moveUrl = "memberMain";
 			}else {
-				moveUrl = "intro";
+				moveUrl = "redirect:/registjacket.do";
 			}
 		}
 		return moveUrl;
@@ -246,35 +250,6 @@ public class SosController {
 		model.addAttribute("questionone", question);
 		System.out.println(question);
 		return "managerQuestionView";
-	}
-	
-	@RequestMapping("/as_insert.do")
-	public String As(@RequestParam("as_file") MultipartFile file, HttpServletRequest request, @RequestParam("as_subject") String as_subject, @RequestParam("as_content") String as_content, HttpSession session) {
-		String originalFile = file.getOriginalFilename();
-		String originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
-		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-		String path = "C:\\eGovFrame-3.10.0\\workspace.edu\\SOSLIFEBACKUP\\src\\main\\webapp\\file\\";
-		File files = new File(path + storedFileName);
-		String as_file = path + storedFileName;
-		String user_id = "";
-		String moveUrl = "";
-		if(session.getAttribute("user")!=null) {
-			tbl_user user = (tbl_user)session.getAttribute("user");
-			user_id = user.getUser_id();
-			try {
-				file.transferTo(files);
-				tbl_as as = new tbl_as(0, as_subject, as_content, as_file, "", user_id);
-				mapper.asInsert(as);
-				moveUrl = "testBoard";
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}else {
-			moveUrl = "testBoard";
-		}
-		return moveUrl;
 	}
 	
 }

@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import com.sos.domain.android_jacketinfo;
 import com.sos.domain.tbl_as;
 import com.sos.domain.tbl_jacket;
+import com.sos.domain.tbl_jacket_location;
 import com.sos.domain.tbl_location;
 import com.sos.domain.tbl_notice;
+import com.sos.domain.tbl_power;
 import com.sos.domain.tbl_question;
 import com.sos.domain.tbl_user;
 import com.sos.domain.tbl_water;
+import com.sos.domain.userJacketUseInfo;
 
 public interface SosMapper {
 	// DB에서 ID와 PW를 비교하여 로그인을 진행하는 메소드
@@ -52,4 +55,18 @@ public interface SosMapper {
 	public ArrayList<tbl_question> getquestioninfo();
 	// 문의사항 세부 정보 조회 메소드
 	public tbl_question getquestiondetail(int q_seq);
+	// 구명조끼 위치 DB에 삽입하는 메소드
+	public int jacketLocationInsert(tbl_jacket_location location);
+	// 연결상태 DB에 삽입하는 메소드
+	public int connectInsert(tbl_power power);
+	// 구명조끼 위치 최근 이력 조회 메소드
+	public tbl_jacket_location getRecodeLocation(tbl_jacket_location location);
+	// 사용자별 구명조끼 수, 문의사항 수 조회 메소드
+	public ArrayList<userJacketUseInfo> getUserJacketUseInfo();
+	// 사용자 구명조끼(센서값) 상세사항 조회 메소드
+	public ArrayList<tbl_water> UserJacketDetailInfo(String user_id);
+	// 사용자 구명조끼별 식별번호 조회 메소드
+	public ArrayList<tbl_jacket> UserJacketProductId(String user_id);
+	// 사용자 구명조끼 상세정보 조회 메소드
+	public ArrayList<tbl_water> userJacketDetailInfo2(String user_id);
 }
