@@ -1,9 +1,10 @@
-# 바다에서의 안전 저희가 지켜드릴게요!(팀명: SOS)
-![image](https://user-images.githubusercontent.com/104811321/181194665-13c7155c-4dc2-4bee-b413-2ead824b7498.png)
+# 바다에서의 안전 저희가 지켜드릴게요![팀명 : SOS(Serving Our Saivor)]
+![image](https://user-images.githubusercontent.com/104811321/187015614-6b20f4e0-aced-499d-ad24-afe15ffe9c00.png)
 
 ## 👀 서비스 소개
-* 서비스명:  해상 조난사고를 도와주는 스마트 구명조끼
-* 서비스설명: 해상 조난사고 발생 시 신고 서비스를 제공하여 위험을 알리고 저체온증을 방지하기 위해 열선패드를 제공한다. 본 제품 이용시 웹에 구명조끼를 등록하여 사용을 알리고 신고 기능 작동 시 즉시 웹에 알림하여 발생한 지점 확인과 실시간 카메라를 확인할 수 있게 한다. 연결상태 확인 서비스, 고객센터(1:1질의응답, AS신청)을 통해 유지보수 서비스를 제공한다. AS를 담당자는 일정관리 서비스를 이용할 수 있다.
+* 서비스명:  해상 조난사고 시 체온 유지, 위급상황 알림이 가능한 스마트 구명조끼
+
+* 서비스설명: 해상 조난사고 발생 시 신고 서비스를 제공하여 위험을 알리고 저체온증을 방지하기 위해 열선패드를 제공한다. 본 제품 이용시 웹에 구명조끼를 등록하여 사용을 알리고 신고 기능 작동 시 즉시 웹에 알림하여 발생한 지점 확인과 실시간 카메라를 확인할 수 있게 한다. 연결상태 확인 서비스, 고객센터(1:1질의응답, AS신청)을 통해 유지보수 서비스를 제공한다.
 <br>
 
 ## 📅 프로젝트 기간
@@ -16,7 +17,7 @@
 * 구명조끼 등록
 * 연결상태 확인 서비스
 * 고객센터 서비스
-* 일정관리 서비스
+* 
 <br>
 
 ## ⛏ 기술스택
@@ -53,6 +54,8 @@
         <td>서버환경</td>
         <td>
             <img src="https://img.shields.io/badge/Apache Tomcat-D22128?style=for-the-badge&logo=Apache Tomcat&logoColor=white"/>
+            ![image](https://user-images.githubusercontent.com/104811321/187015674-5c9fcd75-e757-46d0-98dc-87a12a765687.png)
+
         </td>
     </tr>
     <tr>
@@ -81,5 +84,5 @@
 
 
 ## 📌 ER다이어그램
-![image](https://user-images.githubusercontent.com/104811321/181197192-542f1f1f-3aa7-4326-8e8e-0073696a725c.png)
+![image](https://user-images.githubusercontent.com/104811321/187015688-1a9b7f52-f0c3-4208-b1ed-073cbbb05c62.png)
 <br>
