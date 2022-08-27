@@ -54,7 +54,7 @@
         <td>서버환경</td>
         <td>
             <img src="https://img.shields.io/badge/Apache Tomcat-D22128?style=for-the-badge&logo=Apache Tomcat&logoColor=white"/>
-            ![image](https://user-images.githubusercontent.com/104811321/187015674-5c9fcd75-e757-46d0-98dc-87a12a765687.png)
+            <img src="https://img.shields.io/badge/flask-flask-lightgrey" />
 
         </td>
     </tr>
