@@ -17,7 +17,6 @@
 * 구명조끼 등록
 * 연결상태 확인 서비스
 * 고객센터 서비스
-* 
 <br>
 
 ## ⛏ 기술스택
@@ -54,8 +53,7 @@
         <td>서버환경</td>
         <td>
             <img src="https://img.shields.io/badge/Apache Tomcat-D22128?style=for-the-badge&logo=Apache Tomcat&logoColor=white"/>
-            <img src="https://img.shields.io/badge/flask-flask-lightgrey" />
-
+            <img src="https://img.shields.io/badge/flask-lightgrey?style=for-the-badge&logo=flask&logoColor=white" />
         </td>
     </tr>
     <tr>
